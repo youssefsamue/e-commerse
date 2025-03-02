@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - ShopEase</title>
+    <link rel="stylesheet" href="./log.css">
+</head>
+<body>
+
+    <div class="auth-container">
+        <h2>Create an Account</h2>
+        <form id="signupForm">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="signupEmail" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="signupPassword" name="password" required>
+
+            <button type="submit">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="login.html">Login</a></p>
+        <p id="signupMessage" class="hidden"></p>
+    </div>
+
+    <script>
+        document.getElementById("signupForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("signupEmail").value;
+            const password = document.getElementById("signupPassword").value;
+
+            const response = await fetch("/api/auth/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ name, email, password })
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                alert("Registration successful! Redirecting to login page...");
+                window.location.href = "login.html";
+            } else {
+                document.getElementById("signupMessage").textContent = result.error;
+                document.getElementById("signupMessage").classList.remove("hidden");
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ShopEase</title>
+    <link rel="stylesheet" href="./log.css">
+</head>
+<body>
+
+    <div class="auth-container">
+        <h2>Login to ShopEase</h2>
+        <form id="loginForm">
+            <label for="email">Email:</label>
+            <input type="email" id="loginEmail" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="loginPassword" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+        <p id="loginMessage" class="hidden"></p>
+    </div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const email = document.getElementById("loginEmail").value;
+            const password = document.getElementById("loginPassword").value;
+
+            const response = await fetch("/api/auth/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email, password })
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                alert("Login successful! Redirecting to home page...");
+                window.location.href = "home.html";
+            } else {
+                document.getElementById("loginMessage").textContent = result.error;
+                document.getElementById("loginMessage").classList.remove("hidden");
+            }
+        });
+    </script>
+</body>
+</html>

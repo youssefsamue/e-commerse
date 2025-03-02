@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - ShopEase</title>
+    <link rel="stylesheet" href="./contact.css">
+    <script src="contact.js"></script>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">ShopEase</div>
+        <ul>
+            <li><a href="home.html">Home</a></li>           
+            <li><a href="contact.html" class="active">Contact</a></li>
+
+        </ul>
+    </nav>
+
+ 
+    <div class="container">
+        <h2>Contact Us</h2>
+        <p>We'd love to hear from you! Fill in the form below.</p>
+        
+        <form id="contactForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" required></textarea>
+            
+            <button type="submit">Send Message</button>
+        </form>
+
+        <p id="responseMessage"></p>
+    </div>
+
+    <p id="formResponse" class="hidden">Your message has been sent successfully!</p>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2025 ShopEase. All rights reserved.</p>
+</footer>
+
+
+
+    <script src="script.js"></script>
+</body>
+</html>
